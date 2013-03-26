@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+Ru-De Translit
+{% endblock %}
+
+{% block content %}
+
+<h1>Ru-De Translit, Version {{ version }}</h1>
+
+<form action="/" method="POST">
+	
+	<p>		
+    Choose Transliteration:		
+	<input type="radio" name="type" value="de" {% if type %}{% else %} checked {% endif %}{% ifequal type "de" %} checked {% endifequal %} > German Scientific (DE)  
+    <input type="radio" name="type" value="kritika" {% ifequal type "kritika" %}checked{% endifequal %}> Kritika-Style (KRITIKA)
+	<input type="radio" name="type" value="us" {% ifequal type "us" %}checked{% endifequal %}> American (US) 
+    <input type="radio" name="type" value="iso" {% ifequal type "iso" %}checked{% endifequal %}> ISO 9 (ISO)
+	</p>
+	
+	
+	<p>
+	Paste a Russian Text:<br/>
+    <textarea cols="125" rows="15" name="input" value="" id="input">{% if post %}{{ input }}{% endif %}</textarea>
+	</p>
+	
+	<p><input type="submit" value="translit!" /></p>
+	
+	<p>
+	Transliterated Text{% if post %} ({{ type|upper }}){% endif %}:<br/>
+    <textarea cols="125" rows="15" name="input" value="" id="input">{% if post %}{{ output }}{% endif %}</textarea>
+	</p>
+	
+	<p>
+	The applied transliteration rules for DE, US and ISO9 are taken from <a href="http://de.wikipedia.org/wiki/Kyrillisches_Alphabet#Russisch" target="_blank">Wikipedia</a>.<br/>
+	The rules for KRITIKA match those applied by scientific journals like <a href="http://www.slavica.com/journals/kritika/kritika.html" target="_blank">Kritika</a> and other. 
+	</p>
+	
+  
+  </form>
+
+{% endblock %}
